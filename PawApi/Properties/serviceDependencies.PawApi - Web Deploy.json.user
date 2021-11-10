@@ -1,0 +1,59 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-11-08T01:22:39.1767827Z"
+    },
+    "apis1": {
+      "restored": true,
+      "restoreTime": "2021-11-07T22:18:43.011088Z"
+    }
+  },
+  "parameters": {
+    "PawApi.resourceGroupLocation": {
+      "Name": "PawApi.resourceGroupLocation",
+      "Type": null,
+      "Value": "brazilsouth"
+    },
+    "apis1.resourceGroupName": {
+      "Name": "apis1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "PawApi2021Resource"
+    },
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "78fff45d-f990-43ef-9cf1-acf999eac2ff"
+    },
+    "PawApi.subscriptionId": {
+      "Name": "PawApi.subscriptionId",
+      "Type": "subscription",
+      "Value": "78fff45d-f990-43ef-9cf1-acf999eac2ff"
+    },
+    "PawApi.resourceName": {
+      "Name": "PawApi.resourceName",
+      "Type": null,
+      "Value": "PawApi"
+    },
+    "apis1.subscriptionId": {
+      "Name": "apis1.subscriptionId",
+      "Type": "subscription",
+      "Value": "78fff45d-f990-43ef-9cf1-acf999eac2ff"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "PawApi2021Resource"
+    },
+    "PawApi.resourceGroupName": {
+      "Name": "PawApi.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "PawApi2021Resource"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "78fff45d-f990-43ef-9cf1-acf999eac2ff"
+    }
+  }
+}

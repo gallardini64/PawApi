@@ -1,0 +1,648 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PawApi",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Comodidad": {
+      "get": {
+        "tags": [
+          "Comodidad"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComodidadDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Cuidador": {
+      "get": {
+        "tags": [
+          "Cuidador"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CuidadorDto"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cuidador"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ContratoDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Especies": {
+      "get": {
+        "tags": [
+          "Especie"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EspecieDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LoginDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TokenDto"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UsuarioDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MetodoPago": {
+      "get": {
+        "tags": [
+          "MetodoPago"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MetodoDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Solicitud/List": {
+      "get": {
+        "tags": [
+          "Solicitud"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SolicitudDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Solicitud": {
+      "get": {
+        "tags": [
+          "Solicitud"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SolicitudDto"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Solicitud"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SolicitudDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WeatherForecast"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComodidadDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "descripcion": {
+          "type": "string"
+        }
+      }
+    },
+    "HogarTemporalDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "direccion": {
+          "type": "string"
+        },
+        "localidad": {
+          "type": "string"
+        },
+        "provincia": {
+          "type": "string"
+        },
+        "tipoHogarId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ReseniumDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resenia": {
+          "type": "string"
+        },
+        "puntuacion": {
+          "format": "double",
+          "type": "number"
+        },
+        "estadiaId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CuidadorMascotaDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "especieId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cantidad": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "precioUnitarioDiario": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "FotoDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "FotoCuidadorDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fotoId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "foto": {
+          "$ref": "#/definitions/FotoDto"
+        }
+      }
+    },
+    "CuidadorDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "telefono": {
+          "type": "string"
+        },
+        "puntuaje": {
+          "format": "double",
+          "type": "number"
+        },
+        "hogarTemporals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HogarTemporalDto"
+          }
+        },
+        "resenia": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseniumDto"
+          }
+        },
+        "cuidadorMascota": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CuidadorMascotaDto"
+          }
+        },
+        "fotoCuidadors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FotoCuidadorDto"
+          }
+        }
+      }
+    },
+    "PagoDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "estadiaId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fechaEmitido": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fechaPagado": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "total": {
+          "format": "double",
+          "type": "number"
+        },
+        "importe": {
+          "format": "double",
+          "type": "number"
+        },
+        "comision": {
+          "format": "double",
+          "type": "number"
+        },
+        "numeroRefencia": {
+          "type": "string"
+        },
+        "estado": {
+          "type": "string"
+        },
+        "metodoId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ContratoDto": {
+      "type": "object",
+      "properties": {
+        "personaId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cuidadorId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fechaInicio": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fechaFin": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "cantidadMacotas": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hogarId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "pago": {
+          "$ref": "#/definitions/PagoDto"
+        }
+      }
+    },
+    "EspecieDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "especie1": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginDto": {
+      "required": [
+        "password",
+        "user"
+      ],
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenDto": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "expriacion": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "UsuarioDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "usuario1": {
+          "type": "string"
+        },
+        "contraseña": {
+          "type": "string"
+        }
+      }
+    },
+    "MetodoDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "descripcion": {
+          "type": "string"
+        }
+      }
+    },
+    "FotoSolicitudDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fotoId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "solicitudId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "foto": {
+          "$ref": "#/definitions/FotoDto"
+        }
+      }
+    },
+    "SolicitudDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cuidadorId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "peticion": {
+          "type": "string"
+        },
+        "fechaSolicitud": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fechaAprobacion": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fechaVideoLlamada": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "dniSolicitud": {
+          "type": "string"
+        },
+        "observaciones": {
+          "type": "string"
+        },
+        "motivoRechazo": {
+          "type": "string"
+        },
+        "fotoSolicituds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FotoSolicitudDto"
+          }
+        }
+      }
+    },
+    "WeatherForecast": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "temperatureC": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "temperatureF": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

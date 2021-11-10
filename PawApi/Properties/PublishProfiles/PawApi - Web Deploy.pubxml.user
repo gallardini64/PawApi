@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8nOO5IAp3k2evovUiUT1IQAAAAACAAAAAAAQZgAAAAEAACAAAAAAhOBsOzV9wcDyHvsIE/hi0mzQOO0mvo8efyXaNZeuAgAAAAAOgAAAAAIAACAAAACYmZAW06eHrWsWxO5MXL32eFICfQmqPXCTV1RO9QbdbYAAAADzxI8/YVy8WcAmWYMPULR5wcUEQpJOW6nXZWyvYv7h3S+Ftq/oD4W2zg/8ejgDy/g/CFfzXSh+SJu1HKM58xz9QA5KLOc/pRjMmvdJ1gJo0kzTwYON1RU0fqCRKILdv2PKClZqm2vpjJZn/QxEkyfYYLbygEJcVeRLvaOK4izl1kAAAACfItQg427jX6C5ZLIzFojmjluoMWTzE6/vQksl95IxqMteGQfAa/WLpBacxkDjhV9MKk+EOGSqUq2SJtKs4NJO</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="pawcontext">
+      <Value>Data Source=tcp:pawapidbserver.database.windows.net,1433%3bInitial Catalog=PawApi_db%3bUser Id=pawadmin%40pawapidbserver%3bPassword=admin1234%3f</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
