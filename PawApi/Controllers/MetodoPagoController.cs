@@ -25,7 +25,7 @@ namespace PawApi.Controllers
             var metodos = context.Metodos.ToList();
             MapperConfiguration config = getMapperConfig();
             var mapper = new Mapper(config);
-            return Ok(mapper.Map<List<MetodoDto>>(metodos));
+            return Ok(new Result { Results = mapper.Map<List<MetodoDto>>(metodos) });
         }
         private static MapperConfiguration getMapperConfig()
         {

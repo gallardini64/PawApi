@@ -28,7 +28,7 @@ namespace PawApi.Controllers
                 var Solicitudes = context.Solicituds.ToList();
                 MapperConfiguration config = getMapperConfig();
                 var mapper = new Mapper(config);
-                return Ok(mapper.Map<List<SolicitudDto>>(Solicitudes));
+                return Ok(new Result { Results = mapper.Map<List<SolicitudDto>>(Solicitudes) });
             }
             catch (Exception e)
             {
@@ -36,7 +36,7 @@ namespace PawApi.Controllers
             }
         }
         [HttpGet("")]
-        public async Task<ActionResult<SolicitudDto>> GetById(int id)
+        public async Task<ActionResult<Result>> GetById(int id)
         {
             try
             {
@@ -45,14 +45,20 @@ namespace PawApi.Controllers
                 {
                     return NotFound("Solicitud inexistente");
                 }
+                FillSolicitud(Solicitud);
                 MapperConfiguration config = getMapperConfig();
                 var mapper = new Mapper(config);
-                return Ok(mapper.Map<SolicitudDto>(Solicitud));
+                return Ok(new Result { Results = mapper.Map<SolicitudDto>(Solicitud)});
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        private void FillSolicitud(Solicitud solicitud)
+        {
+            solicitud.Usuario = context.Usuarios.Where(x => x.Id == solicitud.UsuarioId).FirstOrDefault();
         }
 
         [HttpPost("")]
@@ -77,6 +83,7 @@ namespace PawApi.Controllers
             {
                 cfg.AddCollectionMappers();
                 cfg.CreateMap<Solicitud, SolicitudDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<Cuidador, CuidadorDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
                 cfg.CreateMap<FotoSolicitud, FotoSolicitudDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
                 cfg.CreateMap<Foto, FotoDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
 

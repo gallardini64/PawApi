@@ -9,6 +9,7 @@ namespace PawApi.Controllers.DTOs
     {
         public int Id { get; set; }
         public int? CuidadorId { get; set; }
+        public int? UsuarioId { get; set; }
         public string Peticion { get; set; }
         public DateTime? FechaSolicitud { get; set; }
         public DateTime? FechaAprobacion { get; set; }
@@ -16,6 +17,7 @@ namespace PawApi.Controllers.DTOs
         public string DniSolicitud { get; set; }
         public string Observaciones { get; set; }
         public string MotivoRechazo { get; set; }
+        public UsuarioDto Usuario { get; set; }
         public virtual IEnumerable<FotoSolicitudDto> FotoSolicituds { get; set; }
     }
 }

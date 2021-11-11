@@ -27,7 +27,7 @@ namespace PawApi.Controllers
                 var comodidades = context.Comodidads.ToList();
                 MapperConfiguration config = GetMapperConfig();
                 var mapper = new Mapper(config);
-                return Ok(mapper.Map<List<ComodidadDto>>(comodidades));
+                return Ok(new Result { Results = mapper.Map<List<ComodidadDto>>(comodidades) });
             }
             catch (Exception e)
             {

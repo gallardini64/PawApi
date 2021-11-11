@@ -42,10 +42,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CuidadorDto"
-              }
+              "$ref": "#/definitions/Result"
             }
           }
         }
@@ -64,7 +61,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/ContratoDto"
+              "$ref": "#/definitions/EstadiaDto"
             }
           }
         ],
@@ -89,10 +86,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/EspecieDto"
-              }
+              "$ref": "#/definitions/Result"
             }
           }
         }
@@ -288,135 +282,10 @@
         }
       }
     },
-    "HogarTemporalDto": {
+    "Result": {
       "type": "object",
       "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "direccion": {
-          "type": "string"
-        },
-        "localidad": {
-          "type": "string"
-        },
-        "provincia": {
-          "type": "string"
-        },
-        "tipoHogarId": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "ReseniumDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "resenia": {
-          "type": "string"
-        },
-        "puntuacion": {
-          "format": "double",
-          "type": "number"
-        },
-        "estadiaId": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "CuidadorMascotaDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "especieId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "cantidad": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "precioUnitarioDiario": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "FotoDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "path": {
-          "type": "string"
-        }
-      }
-    },
-    "FotoCuidadorDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "fotoId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "foto": {
-          "$ref": "#/definitions/FotoDto"
-        }
-      }
-    },
-    "CuidadorDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "telefono": {
-          "type": "string"
-        },
-        "puntuaje": {
-          "format": "double",
-          "type": "number"
-        },
-        "hogarTemporals": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HogarTemporalDto"
-          }
-        },
-        "resenia": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReseniumDto"
-          }
-        },
-        "cuidadorMascota": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CuidadorMascotaDto"
-          }
-        },
-        "fotoCuidadors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FotoCuidadorDto"
-          }
-        }
+        "results": { }
       }
     },
     "PagoDto": {
@@ -462,7 +331,7 @@
         }
       }
     },
-    "ContratoDto": {
+    "EstadiaDto": {
       "type": "object",
       "properties": {
         "personaId": {
@@ -491,18 +360,6 @@
         },
         "pago": {
           "$ref": "#/definitions/PagoDto"
-        }
-      }
-    },
-    "EspecieDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "especie1": {
-          "type": "string"
         }
       }
     },
@@ -545,6 +402,20 @@
         },
         "contraseña": {
           "type": "string"
+        },
+        "correo": {
+          "type": "string"
+        },
+        "legajo": {
+          "type": "string"
+        },
+        "fechaDeCreacion": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "estadoId": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -556,6 +427,18 @@
           "type": "integer"
         },
         "descripcion": {
+          "type": "string"
+        }
+      }
+    },
+    "FotoDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "path": {
           "type": "string"
         }
       }
@@ -591,6 +474,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "usuarioId": {
+          "format": "int32",
+          "type": "integer"
+        },
         "peticion": {
           "type": "string"
         },
@@ -614,6 +501,9 @@
         },
         "motivoRechazo": {
           "type": "string"
+        },
+        "usuario": {
+          "$ref": "#/definitions/UsuarioDto"
         },
         "fotoSolicituds": {
           "type": "array",

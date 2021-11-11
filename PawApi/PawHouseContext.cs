@@ -335,6 +335,7 @@ namespace PawApi.Models
                 entity.ToTable("Solicitud");
 
                 entity.Property(e => e.CuidadorId).HasColumnName("Cuidador_Id");
+                entity.Property(e => e.CuidadorId).HasColumnName("Usuario_Id");
 
                 entity.Property(e => e.DniSolicitud)
                     .HasMaxLength(50)
@@ -356,6 +357,11 @@ namespace PawApi.Models
                     .WithMany(p => p.Solicituds)
                     .HasForeignKey(d => d.CuidadorId)
                     .HasConstraintName("FK_Solicitud_Cuidador");
+
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.Solicituds)
+                    .HasForeignKey(d => d.UsuarioId)
+                    .HasConstraintName("FK_Solicitud_Usuario");
             });
 
             modelBuilder.Entity<TipoHogar>(entity =>

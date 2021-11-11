@@ -26,5 +26,6 @@ namespace PawApi.Models
         public virtual ICollection<Cuidador> Cuidadors { get; set; }
         public virtual ICollection<Persona> Personas { get; set; }
         public virtual ICollection<UsuarioRol> UsuarioRols { get; set; }
+        public virtual ICollection<Solicitud> Solicituds { get; set; }
     }
 }

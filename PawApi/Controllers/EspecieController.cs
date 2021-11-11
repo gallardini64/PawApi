@@ -21,14 +21,14 @@ namespace PawApi.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<List<EspecieDto>>> GetAll()
+        public async Task<ActionResult<Result>> GetAll()
         {
             try
             {
                 var especies = context.Especies.ToList();
                 MapperConfiguration config = GetMapperConfig();
                 var mapper = new Mapper(config);
-                return Ok(mapper.Map<List<EspecieDto>>(especies));
+                return Ok(new Result {Results = mapper.Map<List<EspecieDto>>(especies)});
             }
             catch (Exception e)
             {
