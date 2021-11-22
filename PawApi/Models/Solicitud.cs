@@ -25,5 +25,6 @@ namespace PawApi.Models
         public virtual Cuidador Cuidador { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual ICollection<FotoSolicitud> FotoSolicituds { get; set; }
+        public string Estado { get; set; }
     }
 }

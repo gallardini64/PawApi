@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PawApi.Controllers.DTOs;
 using PawApi.Models;
 using System;
@@ -10,10 +12,13 @@ using System.Threading.Tasks;
 
 namespace PawApi.Controllers
 {
+    
     [Route("api/Solicitud")]
     [ApiController]
+    [EnableCors()]
     public class SolicitudController : ControllerBase
     {
+
         private PawHouseContext context;
         public SolicitudController(PawHouseContext cont)
         {
@@ -25,7 +30,7 @@ namespace PawApi.Controllers
         {
             try
             {
-                var Solicitudes = context.Solicituds.ToList();
+                var Solicitudes = context.Solicituds.Where(x => x.Estado != "Aprobado" && x.Estado != "Rechazado").ToList();
                 MapperConfiguration config = getMapperConfig();
                 var mapper = new Mapper(config);
                 return Ok(new Result { Results = mapper.Map<List<SolicitudDto>>(Solicitudes) });
@@ -35,6 +40,7 @@ namespace PawApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [HttpGet("")]
         public async Task<ActionResult<Result>> GetById(int id)
         {
@@ -59,6 +65,20 @@ namespace PawApi.Controllers
         private void FillSolicitud(Solicitud solicitud)
         {
             solicitud.Usuario = context.Usuarios.Where(x => x.Id == solicitud.UsuarioId).FirstOrDefault();
+            solicitud.Cuidador = context.Cuidadors.Where(x => x.Id == solicitud.CuidadorId).FirstOrDefault();
+            solicitud.FotoSolicituds = context.FotoSolicituds.Where(x => x.SolicitudId == solicitud.Id).ToList();
+            FillUsuario(solicitud.Usuario);
+            FillCuidadorHogares(solicitud.Cuidador);
+        }
+
+        private void FillCuidadorHogares(Cuidador cuidador)
+        {
+            cuidador.HogarTemporals = context.HogarTemporals.Where(x => x.CuidadorId == cuidador.Id).ToList();
+        }
+
+        private void FillUsuario(Usuario usuario)
+        {
+            usuario.Personas = context.Personas.Where(x => x.UsuarioId == usuario.Id).ToList();
         }
 
         [HttpPost("")]
@@ -69,7 +89,8 @@ namespace PawApi.Controllers
                 MapperConfiguration config = getMapperConfig();
                 var mapper = new Mapper(config);
                 var solicitud = mapper.Map<Solicitud>(solicitudDto);
-                return Ok();
+                context.Entry(solicitud).State = EntityState.Modified;
+                return context.SaveChanges() > 0 ?  Ok("solicitud modificada con exito") : BadRequest("error al modificar solicitud");
             }
             catch (Exception e)
             {
@@ -86,7 +107,12 @@ namespace PawApi.Controllers
                 cfg.CreateMap<Cuidador, CuidadorDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
                 cfg.CreateMap<FotoSolicitud, FotoSolicitudDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
                 cfg.CreateMap<Foto, FotoDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
-
+                cfg.CreateMap<Usuario, UsuarioDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<Persona, PersonaDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<HogarTemporal, HogarTemporalDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<Resenium, ReseniumDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<CuidadorMascota, CuidadorMascotaDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<FotoCuidador, FotoCuidadorDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
             });
         }
     }

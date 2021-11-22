@@ -31,5 +31,7 @@ namespace PawApi.Models
         public virtual ICollection<HogarTemporal> HogarTemporals { get; set; }
         public virtual ICollection<Resenium> Resenia { get; set; }
         public virtual ICollection<Solicitud> Solicituds { get; set; }
+        public string FotoPerfil { get; set; }
+        public string DescripcionServicio { get; set; }
     }
 }

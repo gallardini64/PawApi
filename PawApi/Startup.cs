@@ -35,7 +35,7 @@ namespace PawApi
             {
                 var frontEndURL = Configuration.GetValue<string>("frontend_url");
                 options.AddDefaultPolicy(builder => {
-                    builder.WithOrigins(frontEndURL).AllowAnyMethod().AllowAnyHeader();
+                    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
                 });
             });
             services.AddDbContext<PawHouseContext>();
@@ -50,6 +50,7 @@ namespace PawApi
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PawApi v1"));
             app.UseRouting();
             app.UseAuthorization();
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

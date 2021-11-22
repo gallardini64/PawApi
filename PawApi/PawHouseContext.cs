@@ -79,6 +79,9 @@ namespace PawApi.Models
                     .WithMany(p => p.Cuidadors)
                     .HasForeignKey(d => d.UsuarioId)
                     .HasConstraintName("FK_Cuidador_Usuario");
+
+                entity.Property(e => e.FotoPerfil).IsUnicode(false);
+                entity.Property(e => e.DescripcionServicio).IsUnicode(false);
             });
 
             modelBuilder.Entity<CuidadorMascota>(entity =>
@@ -335,7 +338,7 @@ namespace PawApi.Models
                 entity.ToTable("Solicitud");
 
                 entity.Property(e => e.CuidadorId).HasColumnName("Cuidador_Id");
-                entity.Property(e => e.CuidadorId).HasColumnName("Usuario_Id");
+                entity.Property(e => e.UsuarioId).HasColumnName("Usuario_Id");
 
                 entity.Property(e => e.DniSolicitud)
                     .HasMaxLength(50)
@@ -362,6 +365,8 @@ namespace PawApi.Models
                     .WithMany(p => p.Solicituds)
                     .HasForeignKey(d => d.UsuarioId)
                     .HasConstraintName("FK_Solicitud_Usuario");
+
+                entity.Property(e => e.Estado).IsUnicode(false);
             });
 
             modelBuilder.Entity<TipoHogar>(entity =>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PawApi.Controllers.DTOs;
 using PawApi.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PawApi.Controllers
 {
+    [EnableCors()]
     [Route("api/Cuidador")]
     [ApiController]
     public class CuidadorController : ControllerBase
@@ -43,13 +45,12 @@ namespace PawApi.Controllers
         {
             try
             {
-                var cuidadores = context.Cuidadors.ToList();
                 var config = GetMapperConfig();
                 var mapper = new Mapper(config);
                 var estadia = mapper.Map<Estadium>(contrato);
                 context.Estadia.Add(estadia);
-                await context.SaveChangesAsync();
-                return Ok("Estadia Guardada");
+                var result = await context.SaveChangesAsync();
+                return result > 0 ? Ok("Estadia Guardada") : BadRequest("Error al guardar");
             }
             catch (Exception e)
             {
@@ -57,14 +58,32 @@ namespace PawApi.Controllers
             }
         }
 
+        [HttpGet("EstadiasByPersona")]
+        public async Task<ActionResult> GetEstadias(int personaID)
+        {
+            try
+            {
+                var Estadias = context.Estadia.Where(x => x.PersonaId == personaID).ToList();
+                var config = GetMapperConfig();
+                var mapper = new Mapper(config);
+                return Ok(new Result { Results = mapper.Map<List<EstadiaDto>>(Estadias) });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
+
         private void FillCuidadores(List<Cuidador> cuidadores)
         {
             foreach (var cuidador in cuidadores)
             {
                 cuidador.HogarTemporals.Add(context.HogarTemporals.Where(x => x.CuidadorId == cuidador.Id).FirstOrDefault());
-                cuidador.Resenia.Add(context.Resenia.Where(x => x.CuidadorId == cuidador.Id).FirstOrDefault());
-                cuidador.CuidadorMascota.Add(context.CuidadorMascotas.Where(x => x.CuidadorId == cuidador.Id).FirstOrDefault());
-                cuidador.FotoCuidadors.Add(context.FotoCuidadors.Where(x => x.CuidadorId == cuidador.Id).FirstOrDefault());
+                cuidador.Resenia = context.Resenia.Where(x => x.CuidadorId == cuidador.Id).ToList();
+                cuidador.CuidadorMascota = context.CuidadorMascotas.Where(x => x.CuidadorId == cuidador.Id).ToList();
+                cuidador.FotoCuidadors = context.FotoCuidadors.Where(x => x.CuidadorId == cuidador.Id).ToList();
                 FillFotos(cuidador.FotoCuidadors.ToList());
             }
         }
@@ -89,6 +108,7 @@ namespace PawApi.Controllers
                 cfg.CreateMap<FotoCuidador, FotoCuidadorDto>().EqualityComparison((u, udto) => u.Id == udto.Id);
                 cfg.CreateMap<Foto, FotoDto>().EqualityComparison((u, udto) => u.Id == udto.Id);
                 cfg.CreateMap<Pago, PagoDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
+                cfg.CreateMap<Persona, PersonaDto>().EqualityComparison((u, udto) => u.Id == udto.Id).ReverseMap();
                 cfg.CreateMap<Estadium, EstadiaDto>().ReverseMap();
             });
         }

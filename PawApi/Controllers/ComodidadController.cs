@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PawApi.Controllers.DTOs;
 using PawApi.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PawApi.Controllers
 {
+    [EnableCors()]
     [Route("api/Comodidad")]
     [ApiController]
     public class ComodidadController : ControllerBase
