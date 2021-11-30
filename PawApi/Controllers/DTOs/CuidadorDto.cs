@@ -17,6 +17,7 @@ namespace PawApi.Controllers.DTOs
         public IEnumerable<ReseniumDto> Resenia { get; set; }
         public IEnumerable<CuidadorMascotaDto> CuidadorMascota { get; set; }
         public IEnumerable<FotoCuidadorDto> FotoCuidadors { get; set; }
+        public string Estado { get; set; }
 
     }
 }

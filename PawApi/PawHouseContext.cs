@@ -82,6 +82,7 @@ namespace PawApi.Models
 
                 entity.Property(e => e.FotoPerfil).IsUnicode(false);
                 entity.Property(e => e.DescripcionServicio).IsUnicode(false);
+                entity.Property(e => e.Estado).IsUnicode(false);
             });
 
             modelBuilder.Entity<CuidadorMascota>(entity =>

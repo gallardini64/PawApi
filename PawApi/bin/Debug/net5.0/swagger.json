@@ -204,6 +204,43 @@
         }
       }
     },
+    "/api/login/User/Modify": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ModificacionUsuarioDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UsuarioDto"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/MetodoPago": {
       "get": {
         "tags": [
@@ -277,6 +314,32 @@
           }
         }
       },
+      "post": {
+        "tags": [
+          "Solicitud"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SolicitudDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Solicitud/create": {
       "post": {
         "tags": [
           "Solicitud"
@@ -451,6 +514,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "usuario1": {
+          "type": "string"
+        },
         "correo": {
           "type": "string"
         },
@@ -486,6 +552,33 @@
           "type": "string"
         },
         "nombreYApellido": {
+          "type": "string"
+        },
+        "provincia": {
+          "type": "string"
+        },
+        "localidad": {
+          "type": "string"
+        },
+        "domicilio": {
+          "type": "string"
+        }
+      }
+    },
+    "ModificacionUsuarioDto": {
+      "type": "object",
+      "properties": {
+        "usuarioId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "usuario": {
+          "type": "string"
+        },
+        "correo": {
+          "type": "string"
+        },
+        "contraseña": {
           "type": "string"
         },
         "provincia": {
@@ -649,6 +742,9 @@
           "items": {
             "$ref": "#/definitions/FotoCuidadorDto"
           }
+        },
+        "estado": {
+          "type": "string"
         }
       }
     },

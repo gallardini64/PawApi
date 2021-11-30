@@ -2,6 +2,7 @@
 using AutoMapper.EquivalencyExpression;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PawApi.Controllers.DTOs;
@@ -89,7 +90,7 @@ namespace PawApi.Controllers
         }
 
         [HttpPost("User")]
-        public async Task<ActionResult<List<UsuarioDto>>> CreateUser(CreacionUsuarioDto usuario)
+        public async Task<ActionResult<List<UsuarioDto>>> CreateUser([FromBody]CreacionUsuarioDto usuario)
         {
             try
             {
@@ -105,6 +106,27 @@ namespace PawApi.Controllers
                 context.Usuarios.Add(usuarioNueno);
                 var result = await context.SaveChangesAsync();
                 return result > 0? Ok("Usuario Registrado con Exito") : BadRequest("Error al crear el usuario");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("User/Modify")]
+        public async Task<ActionResult<List<UsuarioDto>>> ModifyUser([FromBody] ModificacionUsuarioDto usuario)
+        {
+            try
+            {
+
+                var usuarioMod = context.Usuarios.Find(usuario.usuarioId);
+                usuarioMod.Usuario1 = usuario.Usuario;
+                usuarioMod.Contraseña = usuario.Contraseña;
+                usuarioMod.Correo = usuario.Correo;
+                usuarioMod.EstadoId = 1;
+                context.Entry(usuarioMod).State = EntityState.Modified;
+                var result = await context.SaveChangesAsync();
+                return result > 0 ? Ok("Usuario Modificado con Exito") : BadRequest("Error al Modificar el usuario");
             }
             catch (Exception e)
             {

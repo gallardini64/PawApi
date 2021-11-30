@@ -28,7 +28,7 @@ namespace PawApi.Controllers
         {
             try
             {
-                var cuidadores = context.Cuidadors.ToList();
+                var cuidadores = context.Cuidadors.Where(x => x.Estado.ToLower() == "activo").ToList();
                 FillCuidadores(cuidadores);
                 MapperConfiguration config = GetMapperConfig();
                 var mapper = new Mapper(config);

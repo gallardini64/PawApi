@@ -33,5 +33,6 @@ namespace PawApi.Models
         public virtual ICollection<Solicitud> Solicituds { get; set; }
         public string FotoPerfil { get; set; }
         public string DescripcionServicio { get; set; }
+        public string Estado { get; set; }
     }
 }
